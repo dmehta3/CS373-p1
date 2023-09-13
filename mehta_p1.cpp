@@ -151,7 +151,7 @@ int main(int argc, char* argv[]) {
         }
         i++;
     }
-    cout << configurations.size() << endl;
+    // cout << configurations.size() << endl;
     vector<int> print;
     bool y = false;
     for (int i = 0; i < configurations.size(); i++) {
