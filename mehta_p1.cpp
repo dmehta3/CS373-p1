@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
                         temp = s;
                     }
                 }
-                bool working = false;   //assume their are no valid pathways
+                bool working = false;   //assume there are no valid pathways
                 for (transition* t : temp->transitions) {   //loop through the state's transitions
                     if (t->symbol == c && working == false) {   //if a symbol matches, add it to configurations
                         configurations[j] = t->to->id;
@@ -142,7 +142,7 @@ int main(int argc, char* argv[]) {
                         configurations.push_back(t->to->id);    //any additional pathways will be added
                     }
                 }
-                if (working == false) { //their were no valid pathways, the configuration is dead
+                if (working == false) { //there were no valid pathways, the configuration is dead
                     configurations[j] = -1;
                 }
             }
