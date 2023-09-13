@@ -27,7 +27,6 @@ class state {
             this->accept = accept;
         }
 };
-
 void duplicate(vector<int> &v)        //remove duplicates from vector
 {
     unordered_set<int> temp;
@@ -36,7 +35,6 @@ void duplicate(vector<int> &v)        //remove duplicates from vector
     });
     v.erase(final, v.end());
 };
-
 int main(int argc, char* argv[]) {
     ifstream in(argv[1]);
     vector<transition*> Transitions;    //main list of transitions which will be used to make transition vectors for each state
