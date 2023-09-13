@@ -27,6 +27,16 @@ class state {
             this->accept = accept;
         }
 };
+
+void duplicate(vector<int> &v)        //remove duplicates from vector
+{
+    unordered_set<int> temp;
+    auto final = remove_if(v.begin(), v.end(), [&temp](int const &i) {
+        return !temp.insert(i).second;
+    });
+    v.erase(final, v.end());
+};
+
 int main(int argc, char* argv[]) {
     ifstream in(argv[1]);
     vector<transition*> Transitions;    //main list of transitions which will be used to make transition vectors for each state
@@ -142,21 +152,30 @@ int main(int argc, char* argv[]) {
         i++;
     }
     cout << configurations.size() << endl;
-
+    vector<int> print;
     bool y = false;
     for (int i = 0; i < configurations.size(); i++) {
         for (int j = 0; j < accept.size(); j++) {
             if (configurations[i] == accept[j]->id && y == false) {
-                cout << "accept" << configurations[i];
+                cout << "accept ";
+                print.push_back(configurations[i]);
                 y = true;
                 continue;
             }
             if (configurations[i] == accept[j]->id && y == true) {
-                cout << " " << configurations[i];
+                print.push_back(configurations[i]);
             }
         }
     }
     if (y == false) {
-        cout << "reject" << endl;
+        cout << "reject ";
+        for (int i = 0; i < configurations.size(); i++) {
+            print.push_back(configurations[i]);
+        }
     }
+    duplicate(print);
+    for (int i = 0; i < (print.size() - 1); i++) {
+        cout << print[i] << " ";
+    }
+    cout << print[print.size() - 1] << endl;
 }
