@@ -119,37 +119,37 @@ int main(int argc, char* argv[]) {
     }
     string input = argv[2];
     vector<int> configurations;
-    configurations.push_back(start->id);
+    configurations.push_back(start->id); //put the start state into the configurations
     int i = 0;
-    while (i < input.length()) {
-        char c = input[i];
-        int limit = configurations.size();
+    while (i < input.length()) {    //start iterating through the string
+        char c = input[i]; 
+        int limit = configurations.size();  //set a limit for the loop outside of the loop
         for (int j = 0; j < limit; ++j) {
-            if (configurations[j] != -1) {
-                int curr = configurations[j];
-                state* temp;
+            if (configurations[j] != -1) {  //check if the configuration is valid
+                int curr = configurations[j];   //set a current state
+                state* temp;    //pointer to current state
                 for (state* s : States) {
                     if (s->id == curr) {
                         temp = s;
                     }
                 }
-                bool working = false;
-                for (transition* t : temp->transitions) {
-                    if (t->symbol == c && working == false) {
+                bool working = false;   //assume their are no valid pathways
+                for (transition* t : temp->transitions) {   //loop through the state's transitions
+                    if (t->symbol == c && working == false) {   //if a symbol matches, add it to configurations
                         configurations[j] = t->to->id;
-                        working = true;
-                        continue;
+                        working = true; //this sets working to true, allowing additional configurations to be added to the vector
+                        continue;   //go to the next iteration to prevent a duplicate
                     }
                     if (t->symbol == c && working == true) {
-                        configurations.push_back(t->to->id);
+                        configurations.push_back(t->to->id);    //any additional pathways will be added
                     }
                 }
-                if (working == false) {
+                if (working == false) { //their were no valid pathways, the configuration is dead
                     configurations[j] = -1;
                 }
             }
         }
-        i++;
+        i++;    //iterate while loop
     }
     // cout << configurations.size() << endl;
     vector<int> print;
